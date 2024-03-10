@@ -1,17 +1,25 @@
+import PostUser from "@/components/postUser/page";
 import styles from "./singlepost.module.css";
 import Image from "next/image";
+import { Suspense } from "react";
+import { getPost } from "@/lib/data";
 
-const getData = async ({ slug }) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
-  if (!res.ok) {
-    throw new Error("Something went wrong");
-  }
-  return res.json();
-};
+//**FETCH DATA WITH AN API**
+// const getData = async (slug) => {
+//   // console.log(slug);
+//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
+//   if (!res.ok) {
+//     throw new Error("Something went wrong");
+//   }
+//   return res.json();
+// };
 
 const SinglePostPage = async ({ params }) => {
   const { slug } = params;
-  const post = await getData(slug);
+  //**FETCH DATA WITH AN API**
+  // const post = await getData(slug);
+  //**FETCH DATA WITHOUT AN API**
+  const post = await getPost(slug);
 
   return (
     <div className={styles.container}>
@@ -33,10 +41,10 @@ const SinglePostPage = async ({ params }) => {
             height={50}
             className={styles.avatar}
           />
-          <div className={styles.detailText}>
-            <span className={styles.detailTitle}>Author</span>
-            <span className={styles.detailValue}>Jhon Doe</span>
-          </div>
+          {/* user container */}
+          <Suspense fallback={<div>Loading...</div>}>
+            <PostUser userId={post.userId} />
+          </Suspense>
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Published</span>
             <span className={styles.detailValue}>01.01.2024</span>
