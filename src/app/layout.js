@@ -6,7 +6,10 @@ import Footer from "@/components/footer/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Webstackpros",
+  title: {
+    default: "Webstackpros.net",
+    template: "%s | Webstackpros.net",
+  },
   description: "Think tomorrow not today",
 };
 
