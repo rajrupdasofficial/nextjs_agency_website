@@ -2,7 +2,7 @@ import { hadleGithubLogin } from "@/lib/actions";
 import styles from "./login.module.css";
 import LoginForm from "@/components/loginForm/loginForm";
 
-const LoginPage = async () => {
+const LoginPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
